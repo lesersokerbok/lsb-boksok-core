@@ -664,6 +664,46 @@ class LsbBook {
 			'default_value' => 0,
 		);
 
+    $icon = array (
+			'key' => 'lsb_acf_tax_term_icon',
+			'label' => __('Ikon/bilde', 'lsb_boksok'),
+			'name' => 'lsb_tax_topic_icon',
+			'type' => 'image',
+			'return_format' => 'array',
+	    'preview_size' => 'thumbnail',
+		);
+
+    $full_description = array(
+			'key' => 'lsb_acf_tax_full_description',
+			'label' => __('Lengre beskrivelse', 'lsb_boksok'),
+      'instructions' => __('Denne teksten brukes i seksjonene på forsiden', 'lsb_boksok'),
+			'name' => 'lsb_tax_full_description',
+			'type' => 'wysiwyg',
+			'default_value' => '',
+			'toolbar' => 'full',
+			'media_upload' => 'no',
+		);
+
+    acf_add_local_field_group(array (
+			'key' => 'lsb_acf_tax_meta',
+			'title' => __('Meta', 'lsb_book'),
+			'fields' => array($full_description),
+			'location' => array(
+				array(
+					array(
+						'param' => 'taxonomy',
+						'operator' => '==',
+						'value' => 'lsb_tax_lsb_cat',
+					)
+				),
+			),
+      'options' => array (
+				'layout' => 'no_box',
+				'hide_on_screen' => array (
+				),
+			),
+		));
+
 		acf_add_local_field_group(array (
 			'key' => 'lsb_acf_tax_topic_settings',
 			'title' => __('Innstillinger', 'lsb_book'),
@@ -678,17 +718,6 @@ class LsbBook {
 				),
 			),
 		));
-
-		// Icon
-
-		$icon = array (
-			'key' => 'lsb_acf_tax_term_icon',
-			'label' => __('Ikon/bilde', 'lsb_boksok'),
-			'name' => 'lsb_tax_topic_icon',
-			'type' => 'image',
-			'return_format' => 'array',
-	'preview_size' => 'thumbnail',
-		);
 
 		acf_add_local_field_group(array (
 			'key' => 'lsb_acf_tax_icon_group',
