@@ -19,14 +19,6 @@ include('taxonomy-util.php');
 new LsbBook();
 new PageSections();
 
-function boksok_get_search_form($form) {
-	ob_start();
-	require( 'searchform-boksok.php' );
-	$form = ob_get_clean();
-	return $form;
-}
-add_filter('get_search_form', __NAMESPACE__ .'\\boksok_get_search_form');
-
 add_filter( 'query_vars', function ($query_vars) {
   return array_merge($query_vars, \LsbFilterQueryUtil::possible_query_vars_for_lsb_book());
 });
