@@ -30,16 +30,16 @@ class PageSections {
 
 		foreach ($this->taxonomies as $key => $value) {
 			$taxonomy_options[] = array (
-				'key' => 'lsb_acf_block_'.$block_type.'_taxonomy_'.$key,
+				'key' => 'lsb_acf_block_taxonomy_'.$key,
 				'label' => $value,
-				'name' => 'lsb_block_'.$block_type.'_taxonomy_'.$key,
+				'name' => 'lsb_block_taxonomy_'.$key,
 				'display' => 'row',
 				'max' => 1,
 				'sub_fields' => array(
 					array(
-						'key' => 'lsb_acf_block_'.$block_type.'_taxonomy_'.$key.'_terms',
+						'key' => 'lsb_acf_block_taxonomy_'.$key.'_terms',
 						'label' => '',
-						'name' => 'lsb_block_'.$block_type.'_taxonomy_'.$key.'_terms',
+						'name' => 'lsb_block_taxonomy_'.$key.'_terms',
 						'type' => 'taxonomy',
 						'taxonomy' => $key,
 						'field_type' => $field_type,
@@ -88,7 +88,7 @@ class PageSections {
 									array (
 										'key' => 'lsb_acf_tax_block_books_title',
 										'label' => 'Tittel',
-										'name' => 'lsb_tax_block_books_title',
+										'name' => 'lsb_tax_block_title',
 										'type' => 'text',
 										'instructions' => '',
 										'required' => 0,
@@ -107,7 +107,7 @@ class PageSections {
 									array (
 										'key' => 'lsb_acf_tax_block_books_filters',
 										'label' => 'Kriterie',
-										'name' => 'lsb_tax_block_books_filters',
+										'name' => 'lsb_tax_block_filters',
 										'type' => 'flexible_content',
 										'instructions' => '',
 										'required' => 0,
@@ -119,7 +119,7 @@ class PageSections {
 										),
 										'button_label' => 'Legg til kriterie',
 										'min' => '',
-										'max' => '',
+										'max' => '1',
 										'layouts' => $this->taxonomy_options('books', false)
 									),
 								),
@@ -135,7 +135,7 @@ class PageSections {
 									array (
 										'key' => 'lsb_acf_tax_block_buttons_title',
 										'label' => 'Tittel',
-										'name' => 'lsb_tax_block_buttons_title',
+										'name' => 'lsb_tax_block_title',
 										'type' => 'text',
 										'instructions' => '',
 										'required' => 0,
@@ -154,7 +154,7 @@ class PageSections {
 									array (
 										'key' => 'lsb_acf_tax_block_buttons_filters',
 										'label' => 'Knapper',
-										'name' => 'lsb_tax_block_buttons_filters',
+										'name' => 'lsb_tax_block_filters',
 										'type' => 'flexible_content',
 										'instructions' => '',
 										'required' => 0,
@@ -195,158 +195,5 @@ class PageSections {
 				'description' => '',
 			));
 		}
-	}
-
-
-	public function register_field_group_page_section_group() {
-
-		$book_shelf_fields = array (
-			array (
-				'key' => 'lsb_acf_book_shelf_sort_by',
-				'label' => 'Sorteringskriterie',
-				'name' => 'lsb_book_shelf_sort_by',
-				'type' => 'radio',
-				'choices' => array (
-					'random' => 'Tilfeldig',
-					'published' => 'Publisert',
-					'added' => 'Lagt til',
-				),
-				'layout' => 'horizontal',
-			),
-			array (
-				'key' => 'lsb_acf_book_shelf_select_from',
-				'label' => 'Velg bøker fra',
-				'name' => 'lsb_book_shelf_select_from',
-				'type' => 'radio',
-				'choices' => array_merge(array('none' => 'Alle bøker'), $this->taxonomies),
-				'layout' => 'horizontal',
-			)
-		);
-
-		acf_add_local_field_group(array (
-			'key' => 'lsb_acf_page_sections_group',
-			'title' => 'Seksjoner/rader',
-			'fields' => array (
-				array(
-					'key' => 'lsb_acf_page_sections',
-					'label' => 'Seksjoner',
-					'name' => 'lsb_page_sections',
-					'type' => 'repeater',
-					'collapsed' => 'lsb_acf_page_section_title',
-					'layout' => 'row',
-					'button_label' => 'Legg til seksjon',
-					'sub_fields' => array(
-						array (
-							'key' => 'lsb_acf_page_section_title',
-							'label' => 'Tittel',
-							'name' => 'lsb_page_section_title',
-							'type' => 'text',
-						),
-						array (
-							'key' => 'lsb_acf_page_section_sub_title',
-							'label' => 'Undertittel',
-							'name' => 'lsb_page_section_sub_title',
-							'type' => 'text',
-						),
-						array (
-							'key' => 'lsb_acf_page_section_type',
-							'label' => 'Seksjonstype',
-							'name' => 'lsb_page_section_type',
-							'type' => 'radio',
-							'choices' => array (
-								'book_shelf' => 'Bokhylle',
-								'navigation' => 'Navigasjon'
-							),
-							'layout' => 'horizontal',
-						),
-						array (
-							'key' => 'lsb_acf_page_section_book_shelf_orderby',
-							'label' => 'Sorteringskriterie',
-							'name' => 'lsb_page_section_book_shelf_orderby',
-							'type' => 'radio',
-							'choices' => array (
-								'added' => 'Lagt til',
-								'random' => 'Tilfeldig',
-								'published' => 'Publisert',
-							),
-							'layout' => 'horizontal',
-							'conditional_logic' => array (
-								array (
-									array (
-										'field' => 'lsb_acf_page_section_type',
-										'operator' => '==',
-										'value' => 'book_shelf',
-									),
-								),
-							),
-						),
-						array(
-							'key' => 'lsb_acf_page_section_navigation_taxonomy',
-							'label' => 'Navigasjonselementer',
-							'name' => 'lsb_page_section_navigation_taxonomy',
-							'type' => 'flexible_content',
-							'min' => 1,
-							'button_label' => 'Legg til elementer fra',
-							'layouts' => $this->section_tax_layouts('navigation', true),
-							'conditional_logic' => array (
-								array (
-									array (
-										'field' => 'lsb_acf_page_section_type',
-										'operator' => '==',
-										'value' => 'navigation',
-									),
-								),
-							),
-						),
-						array(
-							'key' => 'lsb_acf_page_section_book_shelf_taxonomy',
-							'label' => 'Plukk bøker fra',
-							'name' => 'lsb_page_section_book_shelf_taxonomy',
-							'type' => 'flexible_content',
-							'min' => 1,
-							'max' => 1,
-							'button_label' => 'Velg kriterie',
-							'layouts' => $this->section_tax_layouts('book_shelf', false),
-							'conditional_logic' => array (
-								array (
-									array (
-										'field' => 'lsb_acf_page_section_type',
-										'operator' => '==',
-										'value' => 'book_shelf',
-									),
-								),
-							),
-						),
-					),
-				),
-			),
-			'location' => array (
-				array (
-					array (
-						'param' => 'page_template',
-						'operator' => '==',
-						'value' => 'template-boksok-frontpage.php',
-					),
-				),
-				array (
-					array (
-						'param' => 'taxonomy',
-						'operator' => '==',
-						'value' => 'lsb_tax_lsb_cat',
-					),
-				),
-			),
-			'menu_order' => 0,
-			'position' => 'normal',
-			'style' => 'seamless',
-			'label_placement' => 'top',
-			'instruction_placement' => 'label',
-			'hide_on_screen' => array (
-		0 => 'the_content',
-			),
-			'active' => 1,
-			'description' => '',
-		));
-
 	}
 }
