@@ -693,7 +693,7 @@ class LsbBook {
 					array(
 						'param' => 'taxonomy',
 						'operator' => '==',
-						'value' => 'lsb_tax_lsb_cat',
+						'value' => 'all',
 					)
 				),
 			),
