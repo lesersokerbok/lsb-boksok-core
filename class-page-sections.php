@@ -184,6 +184,13 @@ class PageSections {
 							'value' => 'lsb_tax_lsb_cat',
 						),
 					),
+          array (
+            array (
+              'param' => 'page_template',
+              'operator' => '==',
+              'value' => 'template-frontpage.php',
+            ),
+          ),
 				),
 				'menu_order' => 0,
 				'position' => 'normal',
