@@ -19,7 +19,7 @@ class PageSections {
 		add_action( 'acf/init', array( &$this, 'register_taxonomy_field_group' ) );
 	}
 
-	public function taxonomy_options ( $block_type, $is_multi_select ) {
+	public function taxonomy_options ( $page_section_type, $is_multi_select ) {
 
 		$taxonomy_options = array();
 
@@ -30,16 +30,16 @@ class PageSections {
 
 		foreach ($this->taxonomies as $key => $value) {
 			$taxonomy_options[] = array (
-				'key' => 'lsb_acf_block_taxonomy_'.$key,
+				'key' => 'lsb_acf_page_section_taxonomy_'.$key,
 				'label' => $value,
-				'name' => 'lsb_block_taxonomy_'.$key,
+				'name' => 'lsb_page_section_taxonomy_'.$key,
 				'display' => 'row',
 				'max' => 1,
 				'sub_fields' => array(
 					array(
-						'key' => 'lsb_acf_block_taxonomy_'.$key.'_terms',
+						'key' => 'lsb_acf_page_section_taxonomy_'.$key.'_terms',
 						'label' => '',
-						'name' => 'lsb_block_taxonomy_'.$key.'_terms',
+						'name' => 'lsb_page_section_taxonomy_'.$key.'_terms',
 						'type' => 'taxonomy',
 						'taxonomy' => $key,
 						'field_type' => $field_type,
@@ -59,13 +59,13 @@ class PageSections {
 		if( function_exists('acf_add_local_field_group') ) {
 
 			acf_add_local_field_group(array (
-				'key' => 'lsb_acf_taxonomy_blocks_group',
+				'key' => 'lsb_acf_page_sections_group',
 				'title' => 'Taxonomy sections',
 				'fields' => array (
 					array (
-						'key' => 'lsb_acf_blocks',
+						'key' => 'lsb_acf_page_sections',
 						'label' => 'Blokker',
-						'name' => 'lsb_blocks',
+						'name' => 'lsb_page_sections',
 						'type' => 'flexible_content',
 						'instructions' => '',
 						'required' => 0,
@@ -80,15 +80,15 @@ class PageSections {
 						'max' => 10,
 						'layouts' => array (
 							array (
-								'key' => 'lsb_acf_tax_block_books',
-								'name' => 'lsb_tax_block_books',
+								'key' => 'lsb_acf_page_section_books',
+								'name' => 'lsb_page_section_books',
 								'label' => 'Bøker',
-								'display' => 'block',
+								'display' => 'page_section',
 								'sub_fields' => array (
 									array (
-										'key' => 'lsb_acf_tax_block_books_title',
+										'key' => 'lsb_acf_page_section_books_title',
 										'label' => 'Tittel',
-										'name' => 'lsb_tax_block_title',
+										'name' => 'lsb_page_section_title',
 										'type' => 'text',
 										'instructions' => '',
 										'required' => 0,
@@ -105,9 +105,9 @@ class PageSections {
 										'maxlength' => '',
 									),
 									array (
-										'key' => 'lsb_acf_tax_block_books_filters',
+										'key' => 'lsb_acf_page_section_books_filters',
 										'label' => 'Kriterie',
-										'name' => 'lsb_tax_block_filters',
+										'name' => 'lsb_page_section_filters',
 										'type' => 'flexible_content',
 										'instructions' => '',
 										'required' => 0,
@@ -127,15 +127,15 @@ class PageSections {
 								'max' => '',
 							),
 							array (
-								'key' => 'lsb_acf_tax_block_buttons',
-								'name' => 'lsb_tax_block_buttons',
+								'key' => 'lsb_acf_page_section_buttons',
+								'name' => 'lsb_page_section_buttons',
 								'label' => 'Knapper',
-								'display' => 'block',
+								'display' => 'page_section',
 								'sub_fields' => array (
 									array (
-										'key' => 'lsb_acf_tax_block_buttons_title',
+										'key' => 'lsb_acf_page_section_buttons_title',
 										'label' => 'Tittel',
-										'name' => 'lsb_tax_block_title',
+										'name' => 'lsb_page_section_title',
 										'type' => 'text',
 										'instructions' => '',
 										'required' => 0,
@@ -152,9 +152,9 @@ class PageSections {
 										'maxlength' => '',
 									),
 									array (
-										'key' => 'lsb_acf_tax_block_buttons_filters',
+										'key' => 'lsb_acf_page_section_buttons_filters',
 										'label' => 'Knapper',
-										'name' => 'lsb_tax_block_filters',
+										'name' => 'lsb_page_section_filters',
 										'type' => 'flexible_content',
 										'instructions' => '',
 										'required' => 0,
