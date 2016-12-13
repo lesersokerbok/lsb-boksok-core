@@ -673,37 +673,6 @@ class LsbBook {
 	    'preview_size' => 'thumbnail',
 		);
 
-    $full_description = array(
-			'key' => 'lsb_acf_tax_full_description',
-			'label' => __('Lengre beskrivelse', 'lsb_boksok'),
-      'instructions' => __('Denne teksten brukes i seksjonene på forsiden', 'lsb_boksok'),
-			'name' => 'lsb_tax_full_description',
-			'type' => 'wysiwyg',
-			'default_value' => '',
-			'toolbar' => 'full',
-			'media_upload' => 'no',
-		);
-
-    acf_add_local_field_group(array (
-			'key' => 'lsb_acf_tax_meta',
-			'title' => __('Meta', 'lsb_book'),
-			'fields' => array($full_description),
-			'location' => array(
-				array(
-					array(
-						'param' => 'taxonomy',
-						'operator' => '==',
-						'value' => 'all',
-					)
-				),
-			),
-      'options' => array (
-				'layout' => 'no_box',
-				'hide_on_screen' => array (
-				),
-			),
-		));
-
 		acf_add_local_field_group(array (
 			'key' => 'lsb_acf_tax_topic_settings',
 			'title' => __('Innstillinger', 'lsb_book'),
